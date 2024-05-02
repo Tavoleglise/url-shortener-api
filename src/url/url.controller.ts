@@ -1,6 +1,7 @@
 import { Controller, Post, Get, Body, Param, Res } from '@nestjs/common';
 import { UrlService } from './url.service';
 import { Response } from 'express';
+import { Url } from './url-interfaces';
 
 @Controller('url')
 export class UrlController {
@@ -18,8 +19,8 @@ export class UrlController {
   // POST Set new url /add-url
   @Post('add-url')
   async addUrl(@Body('url') url: string) {
-    const code = await this.urlService.addUrl(url);
-    console.log(code);
-    return { code };
+    const urlData: Url = await this.urlService.addUrl(url);
+    console.log(urlData);
+    return { urlData };
   }
 }
